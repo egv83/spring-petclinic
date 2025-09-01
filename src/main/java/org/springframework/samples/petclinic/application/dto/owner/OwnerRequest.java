@@ -1,22 +1,46 @@
 package org.springframework.samples.petclinic.application.dto.owner;
 
-public class OwnerRequest {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+import java.io.Serializable;
+
+public class OwnerRequest implements Serializable {
+
+	@NotBlank
+	private final Integer id;
+
+	@NotBlank
 	private final String firstName;
+
+	@NotBlank
 	private final String lastName;
+
+	@NotBlank
 	private final String address;
+
+	@NotBlank
 	private final String city;
-	private final String telefone;
+
+	@NotBlank
+	@Pattern(regexp = "\\d{10}", message = "{telephone.invalid}")
+	private final String telephone;
 
 	private OwnerRequest(Builder builder){
+		this.id = builder.id;
 		this.firstName = builder.firstName;;
 		this.lastName = builder.lastName;
 		this.address = builder.address;
 		this.city = builder.city;
-		this.telefone = builder.telefone;
+		this.telephone = builder.telephone;
 	}
 
 	public static Builder builder(){
 		return new Builder();
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public String getFirstName() {
@@ -35,16 +59,22 @@ public class OwnerRequest {
 		return city;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getTelephone() {
+		return telephone;
 	}
 
 	public static class Builder{
+		private Integer id;
 		private String firstName;
 		private String lastName;
 		private String address;
 		private String city;
-		private String telefone;
+		private String telephone;
+
+		public Builder id(Integer id){
+			this.id = id;
+			return this;
+		}
 
 		public Builder firstName(String firstName){
 			this.firstName = firstName;
@@ -66,8 +96,8 @@ public class OwnerRequest {
 			return this;
 		}
 
-		public Builder telefone(String telefone){
-			this.telefone = telefone;
+		public Builder telephone(String telephone){
+			this.telephone = telephone;
 			return this;
 		}
 

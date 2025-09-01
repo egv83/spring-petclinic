@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.infraestructure.persistence;
 
 import java.util.*;
 
+import jakarta.persistence.*;
 import org.springframework.samples.petclinic.infraestructure.persistence.base.PersonEntity;
 
 /**
@@ -29,21 +30,21 @@ import org.springframework.samples.petclinic.infraestructure.persistence.base.Pe
  * @author Oliver Drotbohm
  * @author Wick Dynex
  */
-//@Entity
-//@Table(name = "owners")
+@Entity
+@Table(name = "owners")
 public class OwnerEntity extends PersonEntity {
 
-//	@Column(name = "address")
+	@Column(name = "address")
 	private String address;
 
-//	@Column(name = "city")
+	@Column(name = "city")
 	private String city;
 
-//	@Column(name = "telephone")
+	@Column(name = "telephone")
 	private String telephone;
 
-//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "owner")
-//	@OrderBy("name")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "owner")
+	@OrderBy("name")
 	private Set<PetEntity> pets = new LinkedHashSet<>();
 
 	public OwnerEntity(){

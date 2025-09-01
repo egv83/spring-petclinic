@@ -20,10 +20,11 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.infraestructure.persistence.base.NamedEntity;
 
 import org.springframework.samples.petclinic.owner.PetType;
-import org.springframework.samples.petclinic.owner.Visit;
 
 /**
  * Simple business object representing a pet.
@@ -33,22 +34,26 @@ import org.springframework.samples.petclinic.owner.Visit;
  * @author Sam Brannen
  * @author Wick Dynex
  */
-//@Entity
-//@Table(name = "pets")
+@Entity
+@Table(name = "pets")
 public class PetEntity extends NamedEntity {
 
-//	@Column(name = "birth_date")
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "birth_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 
-//	@ManyToOne
-//	@JoinColumn(name = "type_id")
+	@ManyToOne
+	@JoinColumn(name = "type_id")
 	private PetType type;
 
-//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) /* Con Lazy permite la cuarga cuando es requerida*/
-//	@JoinColumn(name = "pet_id")
-//	@OrderBy("date ASC")
-	private final Set<Visit> visits = new LinkedHashSet<>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) /* Con Lazy permite la cuarga cuando es requerida*/
+	@JoinColumn(name = "pet_id")
+	@OrderBy("date ASC")
+	private final Set<VisitEntity> visits = new LinkedHashSet<>();
+
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private OwnerEntity owner;
 
 	public PetEntity(){
 
@@ -70,8 +75,16 @@ public class PetEntity extends NamedEntity {
 		this.birthDate = birthDate;
 	}
 
-	public Set<Visit> getVisits() {
+	public Set<VisitEntity> getVisits() {
 		return Collections.unmodifiableSet(visits);
+	}
+
+	public OwnerEntity getOwner() {
+		return owner;
+	}
+
+	public void setOwner(OwnerEntity owner) {
+		this.owner = owner;
 	}
 
 
