@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.application.mapper;
 
 import org.springframework.data.domain.Page;
+import org.springframework.samples.petclinic.application.dto.owner.OwnerReques;
 import org.springframework.samples.petclinic.application.dto.owner.OwnerRequest;
 import org.springframework.samples.petclinic.application.dto.owner.OwnerResponse;
 import org.springframework.samples.petclinic.domain.model.Owner;
@@ -9,8 +10,10 @@ import org.springframework.samples.petclinic.infraestructure.persistence.OwnerEn
 public interface OwnerDtoMapper {
 
 	Owner toModel(OwnerRequest request);
+	Owner toModel(OwnerReques request);
 
 	OwnerResponse toResponse(Owner model);
+	OwnerReques toRequest(Owner model);
 
 //	Page<Owner> toModel(Page<OwnerEntity> entitie);
 	Page<OwnerResponse> toResponsePage(Page<Owner> model);

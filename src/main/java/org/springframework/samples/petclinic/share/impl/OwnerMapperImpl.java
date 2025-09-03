@@ -8,7 +8,11 @@ import org.springframework.samples.petclinic.share.mappers.OwnerMapper;
 import org.springframework.samples.petclinic.share.mappers.PetMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 public class OwnerMapperImpl implements OwnerMapper{
@@ -50,6 +54,17 @@ public class OwnerMapperImpl implements OwnerMapper{
 			return Page.empty();
 		}
 		return entity.map(this::toModel);
+	}
+
+	@Override
+	public Collection<Owner> toColectionModel(Collection<OwnerEntity> entity) {
+		if(Objects.isNull(entity)){
+			return new ArrayList<>();
+		}
+
+		return entity.stream()
+			.map(this::toModel)
+			.collect(Collectors.toList());
 	}
 
 //	@Override

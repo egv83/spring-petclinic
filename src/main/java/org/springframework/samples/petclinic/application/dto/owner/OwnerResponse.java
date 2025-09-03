@@ -1,5 +1,11 @@
 package org.springframework.samples.petclinic.application.dto.owner;
 
+import org.springframework.samples.petclinic.domain.model.Pet;
+
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
 public class OwnerResponse {
 
 	private final Integer id;
@@ -7,7 +13,8 @@ public class OwnerResponse {
 	private final String lastName;
 	private final String address;
 	private final String city;
-	private final String telefone;
+	private final String telephone;
+	private Set<Pet> pets = new LinkedHashSet<>();
 
 	private OwnerResponse(Builder builder) {
 		this.id = builder.id;
@@ -15,7 +22,10 @@ public class OwnerResponse {
 		this.lastName = builder.lastName;;
 		this.address = builder.address;
 		this.city = builder.city;
-		this.telefone = builder.telefone;
+		this.telephone = builder.telephone;
+		if(Objects.nonNull(builder.pets)){
+			this.pets.addAll(builder.pets);
+		}
 	}
 
 	public Integer getId() {
@@ -38,8 +48,24 @@ public class OwnerResponse {
 		return city;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public Set<Pet> getPets() {
+		return pets;
+	}
+
+	@Override
+	public String toString() {
+		return "OwnerResponse{" +
+			"id=" + id +
+			", firstName='" + firstName + '\'' +
+			", lastName='" + lastName + '\'' +
+			", address='" + address + '\'' +
+			", city='" + city + '\'' +
+			", telephone='" + telephone + '\'' +
+			'}';
 	}
 
 	public static Builder builder(){
@@ -52,7 +78,8 @@ public class OwnerResponse {
 		private String lastName;
 		private String address;
 		private String city;
-		private String telefone;
+		private String telephone;
+		private Set<Pet> pets;
 
 		public Builder id(Integer id){
 			this.id = id;
@@ -79,8 +106,13 @@ public class OwnerResponse {
 			return this;
 		}
 
-		public Builder telefone(String telefone){
-			this.telefone = telefone;
+		public Builder telephone(String telephone){
+			this.telephone = telephone;
+			return this;
+		}
+
+		public Builder pets(Set<Pet> pets){
+			this.pets = pets;
 			return this;
 		}
 

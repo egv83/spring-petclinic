@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.samples.petclinic.infraestructure.persistence.OwnerEntity;
 
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -44,7 +45,9 @@ public interface OwnerRepository extends JpaRepository<OwnerEntity, Integer> {
 //	 * @return a Collection of matching {@link Owner}s (or an empty Collection if none
 //	 * found)
 //	 */
-	Page<OwnerEntity> findByLastNameStartingWith(String lastName, Pageable pageable);
+	Page<OwnerEntity> findByLastNameStartingWithPageable(String lastName, Pageable pageable);
+
+	Collection<OwnerEntity> findByLastNameStartingWith(String lastName);
 
 //	/**
 //	 * Retrieve an {@link Owner} from the data store by id.

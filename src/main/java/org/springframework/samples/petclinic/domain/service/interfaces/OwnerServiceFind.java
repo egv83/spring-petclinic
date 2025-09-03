@@ -11,9 +11,9 @@ public interface OwnerServiceFind {
 
 	Owner findOwnerById(Integer id);
 
-//	Collection<Owner> findOwnerByLastName(String lastName);
-
 //	Page<Owner> findPaginatedForOwnersLastName(int page, String lastName);
+
+	Collection<Owner> findByLastNameStartingWith(String lastName);
 
 	Page<Owner> findByLastNameStartingWith(String lastName, int page);
 

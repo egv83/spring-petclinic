@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 
 import java.io.Serializable;
 
-public class OwnerRequest implements Serializable {
+public class OwnerReques implements Serializable {
 
 //	@NotBlank
 	private Integer id;
@@ -26,16 +26,7 @@ public class OwnerRequest implements Serializable {
 	@Pattern(regexp = "\\d{10}", message = "{telephone.invalid}")
 	private String telephone;
 
-	private OwnerRequest(Builder builder){
-		this.id = builder.id;
-		this.firstName = builder.firstName;;
-		this.lastName = builder.lastName;
-		this.address = builder.address;
-		this.city = builder.city;
-		this.telephone = builder.telephone;
-	}
-
-	public OwnerRequest (){
+	public OwnerReques(){
 	}
 
 	public void setId(Integer id) {
@@ -62,10 +53,6 @@ public class OwnerRequest implements Serializable {
 		this.telephone = telephone;
 	}
 
-	public static Builder builder(){
-		return new Builder();
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -90,46 +77,15 @@ public class OwnerRequest implements Serializable {
 		return telephone;
 	}
 
-	public static class Builder{
-		private Integer id;
-		private String firstName;
-		private String lastName;
-		private String address;
-		private String city;
-		private String telephone;
-
-		public Builder id(Integer id){
-			this.id = id;
-			return this;
-		}
-
-		public Builder firstName(String firstName){
-			this.firstName = firstName;
-			return this;
-		}
-
-		public Builder lastName(String lastName){
-			this.lastName = lastName;
-			return this;
-		}
-
-		public Builder address(String address){
-			this.address = address;
-			return this;
-		}
-
-		public Builder city(String city){
-			this.city = city;
-			return this;
-		}
-
-		public Builder telephone(String telephone){
-			this.telephone = telephone;
-			return this;
-		}
-
-		public OwnerRequest build(){
-			return new OwnerRequest(this);
-		}
+	@Override
+	public String toString() {
+		return "OwnerReques{" +
+			"id=" + id +
+			", firstName='" + firstName + '\'' +
+			", lastName='" + lastName + '\'' +
+			", address='" + address + '\'' +
+			", city='" + city + '\'' +
+			", telephone='" + telephone + '\'' +
+			'}';
 	}
 }

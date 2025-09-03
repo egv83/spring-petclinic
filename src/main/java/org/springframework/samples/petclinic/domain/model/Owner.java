@@ -6,17 +6,20 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Owner extends Person {
+public class Owner {
 
+	private Integer id;
+	private String firtsName;
+	private String lastName;
 	private String address;
 	private String city;
 	private String telephone;
 	private Set<Pet> pets = new LinkedHashSet<>();
 
 	public Owner(OwnerBuilder builder){
-		this.setId(builder.id);
-		this.setFirtsName(builder.firtsName);
-		this.setLastName(builder.lastName);
+		this.id = builder.id;
+		this.firtsName = builder.firtsName;
+		this.lastName = builder.lastName;
 		this.address = builder.address;
 		this.city = builder.city;
 		this.telephone = builder.telephone;
@@ -33,7 +36,15 @@ public class Owner extends Person {
 	}
 
 	public Integer getId() {
-		return this.getId();
+		return id;
+	}
+
+	public String getFirtsName() {
+		return firtsName;
+	}
+
+	public String getLastName() {
+		return lastName;
 	}
 
 	public String getAddress() {
@@ -116,6 +127,7 @@ public class Owner extends Person {
 			this.telephone = telephone;
 			return this;
 		}
+
 		public OwnerBuilder pets(Set<Pet> pets){
 			this.pets = pets;
 			return this;

@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.domain.service.impl;
+package org.springframework.samples.petclinic.domain.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,16 +10,18 @@ import org.springframework.samples.petclinic.infraestructure.repository.OwnerRep
 import org.springframework.samples.petclinic.share.mappers.OwnerMapper;
 import org.springframework.samples.petclinic.share.mappers.PetMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.List;
 
 @Service
-public class OwnerServiceImpl implements OwnerServiceCreate, OwnerServiceFind {
+public class OwnerService implements OwnerServiceCreate, OwnerServiceFind {
 
 	private final OwnerRepository ownerRepository;
 	private final OwnerMapper ownerMapper;
 	private final PetMapper petMapper;
 
-	public OwnerServiceImpl(OwnerRepository ownerRepository, OwnerMapper ownerMapper, PetMapper petMapper) {
+	public OwnerService(OwnerRepository ownerRepository, OwnerMapper ownerMapper, PetMapper petMapper) {
 		this.ownerRepository = ownerRepository;
 		this.ownerMapper = ownerMapper;
 		this.petMapper = petMapper;
@@ -55,6 +57,7 @@ public class OwnerServiceImpl implements OwnerServiceCreate, OwnerServiceFind {
 			.address(owner.getAddress())
 			.city(owner.getCity())
 			.telephone(owner.getTelephone())
+			.pets(owner.getPets())
 			.build();
 
 		ownerRepository.save(
@@ -76,6 +79,13 @@ public class OwnerServiceImpl implements OwnerServiceCreate, OwnerServiceFind {
 		);
 	}
 
+	@Override
+	public Collection<Owner> findByLastNameStartingWith(String lastName) {
+		return ownerMapper.toColectionModel(
+			ownerRepository.findByLastNameStartingWith(lastName)
+		);
+	}
+
 //	@Override
 //	public Page<Owner> findPaginatedForOwnersLastName(int page, String lastName) {
 //		int pageSize = 5;
@@ -92,8 +102,14 @@ public class OwnerServiceImpl implements OwnerServiceCreate, OwnerServiceFind {
 		int pageSize = 5;
 		Pageable pageable = PageRequest.of(page-1,pageSize);
 
+//		var tmp = ownerRepository.findByLastNameStartingWithPageable(lastName,pageable);
+//
+//		var maper = ownerMapper.toPageModel(
+//			ownerRepository.findByLastNameStartingWithPageable(lastName,pageable)
+//		);
+
 		return ownerMapper.toPageModel(
-			ownerRepository.findByLastNameStartingWith(lastName,pageable)
+			ownerRepository.findByLastNameStartingWithPageable(lastName,pageable)
 		);
 	}
 

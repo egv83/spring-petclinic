@@ -78,7 +78,7 @@ public class Pet {
 			"name='" + name + '\'' +
 			", birthDate=" + birthDate +
 			", type=" + type +
-			", visits=" + visits +
+//			", visits=" + visits +
 			'}';
 	}
 

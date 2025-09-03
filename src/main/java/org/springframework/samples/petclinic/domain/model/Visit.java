@@ -51,6 +51,15 @@ public class Visit extends Base {
 		this.pet = pet;
 	}
 
+	@Override
+	public String toString() {
+		return "Visit{" +
+			"id=" + id +
+			", date=" + date +
+			", description='" + description + '\'' +
+			'}';
+	}
+
 	public static VisitBuilder builder(){
 		return new VisitBuilder();
 	}

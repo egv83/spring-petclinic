@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.application.controller;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.samples.petclinic.application.dto.owner.OwnerReques;
 import org.springframework.samples.petclinic.application.dto.owner.OwnerRequest;
 import org.springframework.samples.petclinic.application.dto.owner.OwnerResponse;
 import org.springframework.samples.petclinic.application.mapper.OwnerDtoMapper;
@@ -44,13 +45,14 @@ public class OwnerController {
 	}
 
 	@ModelAttribute("owner")
-	public OwnerResponse findOwner(@PathVariable(name = "ownerId", required = false) Integer ownerId) {
+	public OwnerResponse findOwner(@PathVariable(name = "ownerId", required = false) Integer ownerId, Model model) {
 
 		if(Objects.isNull(ownerId)){
 			return OwnerResponse.builder().build();
 		}
 
 		try {
+//			model.addAttribute("id",ownerId);
 			return ownerDtoMapper.toResponse(
 				ownerServiceFind.findOwnerById(ownerId)
 			);
@@ -141,12 +143,18 @@ public class OwnerController {
 //	}
 
 	@GetMapping("/owners/{ownerId}/edit")
-	public String initUpdateOwnerForm() {
+	public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model model) {
+		OwnerResponse response = ownerDtoMapper.toResponse(
+			ownerServiceFind.findOwnerById(ownerId)
+		);
+		model.addAttribute("isNew",false);
+		model.addAttribute("owner",response);
+
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/owners/{ownerId}/edit")
-	public String processUpdateOwnerForm(@Valid OwnerRequest request, BindingResult result, @PathVariable("ownerId") int ownerId,
+	public String processUpdateOwnerForm(@Valid @ModelAttribute("OwnerRequest") OwnerReques request, BindingResult result, @PathVariable("ownerId") int ownerId,
 										 RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("error", "There was an error in updating the owner.");
@@ -154,6 +162,17 @@ public class OwnerController {
 		}
 
 		try {
+
+//			if(request.getId() != ownerId){
+//				result.rejectValue("id", "mismatch", "The owner ID in the form does not match the URL.");
+//				redirectAttributes.addFlashAttribute("error", "Owner ID mismatch. Please try again.");
+//				return "redirect:/owners/{ownerId}/edit";
+//			}
+
+//			var ownerTmp = ownerServiceFind.findOwnerById(ownerId);
+//			if (Objects.nonNull(ownerTmp)){
+//
+//			}
 
 			ownerServiceCreate.updateOwner(
 				ownerDtoMapper.toModel(request),
@@ -167,7 +186,7 @@ public class OwnerController {
 		}catch (IllegalArgumentException e){
 			result.rejectValue("id", "mismatch", "The owner ID in the form does not match the URL.");
 			redirectAttributes.addFlashAttribute("error", "Owner ID mismatch. Please try again.");
-			return "redirect:/owners/{ownerId}/edit";
+//			return "redirect:/owners/{ownerId}/edit";
 		}
 
 //		if (request.getId() != ownerId) {
@@ -180,6 +199,7 @@ public class OwnerController {
 //		this.owners.save(owner);
 //		redirectAttributes.addFlashAttribute("message", "Owner Values Updated");
 //		return "redirect:/owners/{ownerId}";
+		return "";
 	}
 
 //	/**

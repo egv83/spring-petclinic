@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.samples.petclinic.domain.model.Owner;
 import org.springframework.samples.petclinic.infraestructure.persistence.OwnerEntity;
 
+import java.util.Collection;
+
 
 public interface OwnerMapper {
 
@@ -13,6 +15,6 @@ public interface OwnerMapper {
 
 	Page<Owner> toPageModel(Page<OwnerEntity> entity);
 
-//	Set<Owner> toSetModel(Set<Owner> entoties);
+	Collection<Owner> toColectionModel(Collection<OwnerEntity> entity);
 
 }
