@@ -10,16 +10,13 @@ import org.springframework.samples.petclinic.domain.service.strategy.BuscarPetSt
 import org.springframework.samples.petclinic.domain.service.strategy.PetXNombreStrategy;
 import org.springframework.samples.petclinic.domain.service.strategy.PetXOwnerStrategy;
 import org.springframework.samples.petclinic.share.mappers.PetMapper;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/strategy")
+@RequestMapping("/strategy/")
 public class OwnerRestController {
 
 	private final BuscarPetService buscarPetService;
@@ -32,14 +29,17 @@ public class OwnerRestController {
 		this.petDtoMapper = petDtoMapper;
 	}
 
+
+	@GetMapping("owners/pets")
 	public Collection<PetResponse> buscarPets(
-		@PathVariable("owner") String owner,
+		//@PathVariable("nombre") String nombre,
 		@RequestParam String consulta,
 		@RequestParam String tipoConsulta){
 
 		Collection<PetResponse> petCollction = new ArrayList<>();
 
-		Collection<Owner> ownerTMP = ownerServiceFind.findByLastNameStartingWith(owner);
+//		Collection<Owner> ownerTMP = ownerServiceFind.findByLastNameStartingWith(nombre);
+		Collection<Owner> ownerTMP = ownerServiceFind.findAll();
 
 		if(ownerTMP.isEmpty()){
 			return new ArrayList<>();

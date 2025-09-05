@@ -44,7 +44,7 @@ public class PetEntity extends NamedEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "type_id")
-	private PetType type;
+	private PetTypeEntity type;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) /* Con Lazy permite la cuarga cuando es requerida*/
 	@JoinColumn(name = "pet_id")
@@ -59,11 +59,11 @@ public class PetEntity extends NamedEntity {
 
 	}
 
-	public PetType getType() {
+	public PetTypeEntity getType() {
 		return this.type;
 	}
 
-	public void setType(PetType type) {
+	public void setType(PetTypeEntity type) {
 		this.type = type;
 	}
 

@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.domain.model;
 
-import org.springframework.samples.petclinic.owner.PetType;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -78,7 +77,7 @@ public class Pet {
 			"name='" + name + '\'' +
 			", birthDate=" + birthDate +
 			", type=" + type +
-//			", visits=" + visits +
+			", visits=" + visits +
 			'}';
 	}
 

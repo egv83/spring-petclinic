@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class PetResponse {
 
-	private final Integer id;
+//	private final Integer id;
 	private final String name;
 	private final String  type;
 	private final LocalDate birthDate;
 	private final Integer ownerId;
 
 	private PetResponse(Builder builder){
-		this.id = builder.id;
+//		this.id = builder.id;
 		this.name = builder.name;
 		this.type = builder.type;
 		this.birthDate = builder.birthDate;
@@ -22,9 +22,9 @@ public class PetResponse {
 		return new Builder();
 	}
 
-	public Integer getId() {
-		return id;
-	}
+//	public Integer getId() {
+//		return id;
+//	}
 
 	public String getName() {
 		return name;
@@ -44,16 +44,16 @@ public class PetResponse {
 
 	public static class Builder {
 
-		private Integer id;
+//		private Integer id;
 		private String name;
 		private String  type;
 		private LocalDate birthDate;
 		private Integer ownerId;
 
-		public Builder id(Integer id) {
-			this.id = id;
-			return this;
-		}
+//		public Builder id(Integer id) {
+//			this.id = id;
+//			return this;
+//		}
 
 		public Builder name(String name) {
 			this.name = name;

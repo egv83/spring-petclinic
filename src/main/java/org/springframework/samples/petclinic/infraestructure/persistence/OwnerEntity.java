@@ -85,6 +85,11 @@ public class OwnerEntity extends PersonEntity {
 		this.pets = pets;
 	}
 
+	public void addPet(PetEntity pet) {
+		this.pets.add(pet);
+		pet.setOwner(this);
+	}
+
 
 
 }

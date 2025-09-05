@@ -13,8 +13,11 @@ public interface OwnerServiceFind {
 
 //	Page<Owner> findPaginatedForOwnersLastName(int page, String lastName);
 
-	Collection<Owner> findByLastNameStartingWith(String lastName);
+	//Collection<Owner> findByLastNameStartingWith(String lastName);
+
+	Collection<Owner> findAll();
 
 	Page<Owner> findByLastNameStartingWith(String lastName, int page);
+
 
 }

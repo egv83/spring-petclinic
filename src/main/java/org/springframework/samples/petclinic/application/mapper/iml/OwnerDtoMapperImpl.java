@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.application.mapper.iml;
 
 import org.springframework.data.domain.Page;
+import org.springframework.samples.petclinic.application.dto.owner.CreateOwnerConPetRequest;
 import org.springframework.samples.petclinic.application.dto.owner.OwnerReques;
 import org.springframework.samples.petclinic.application.dto.owner.OwnerRequest;
 import org.springframework.samples.petclinic.application.dto.owner.OwnerResponse;
@@ -29,6 +30,17 @@ public class OwnerDtoMapperImpl implements OwnerDtoMapper {
 	public Owner toModel(OwnerReques request) {
 		return Owner.builder()
 			.id(request.getId())
+			.firtsName(request.getFirstName())
+			.lastName(request.getLastName())
+			.address(request.getAddress())
+			.city(request.getCity())
+			.telephone(request.getTelephone())
+			.build();
+	}
+
+	@Override
+	public Owner toModel(CreateOwnerConPetRequest request) {
+		return Owner.builder()
 			.firtsName(request.getFirstName())
 			.lastName(request.getLastName())
 			.address(request.getAddress())

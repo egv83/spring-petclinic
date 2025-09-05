@@ -45,6 +45,7 @@ public class OwnerMapperImpl implements OwnerMapper{
 		entity.setAddress(model.getAddress());
 		entity.setCity(model.getCity());
 		entity.setTelephone(model.getTelephone());
+		entity.setPets(petMapper.toSetEntity(model.getPets()));
 		return entity;
 	}
 
@@ -66,10 +67,5 @@ public class OwnerMapperImpl implements OwnerMapper{
 			.map(this::toModel)
 			.collect(Collectors.toList());
 	}
-
-//	@Override
-//	public Set<Owner> toSetModel(Set<Owner> entoties) {
-//		return Set.of();
-//	}
 
 }

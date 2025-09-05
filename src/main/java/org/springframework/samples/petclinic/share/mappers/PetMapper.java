@@ -12,5 +12,6 @@ public interface PetMapper {
 	PetEntity toEntity(Pet model);
 
 	Set<Pet> toSetModel(Set<PetEntity> entities);
+	Set<PetEntity> toSetEntity(Set<Pet> models);
 
 }

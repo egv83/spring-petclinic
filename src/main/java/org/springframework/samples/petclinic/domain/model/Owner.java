@@ -23,13 +23,15 @@ public class Owner {
 		this.address = builder.address;
 		this.city = builder.city;
 		this.telephone = builder.telephone;
+
 		if(Objects.nonNull(builder.pets)){
-			this.pets.addAll(builder.pets);
+//			this.pets.addAll(builder.pets);
+			builder.pets.forEach(this::addPet);
 		}
 	}
 
 	public void addPet(Pet pet){
-		if(Objects.isNull(pet.getOwner())){
+		if(Objects.isNull(pet.getOwner()) || !pet.getOwner().equals(this)){
 			pet.setOwner(this);
 		}
 		this.pets.add(pet);
@@ -78,9 +80,13 @@ public class Owner {
 	@Override
 	public String toString() {
 		return "Owner{" +
-			"address='" + address + '\'' +
+			"id=" + id +
+			", firtsName='" + firtsName + '\'' +
+			", lastName='" + lastName + '\'' +
+			", address='" + address + '\'' +
 			", city='" + city + '\'' +
 			", telephone='" + telephone + '\'' +
+			", pets=" + pets +
 			'}';
 	}
 
@@ -96,7 +102,6 @@ public class Owner {
 		private String city;
 		private String telephone;
 		private Set<Pet> pets;
-
 
 		public OwnerBuilder id(Integer id){
 			this.id = id;

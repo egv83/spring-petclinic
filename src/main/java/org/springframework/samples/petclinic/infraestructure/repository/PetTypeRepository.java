@@ -22,6 +22,7 @@ import org.springframework.samples.petclinic.infraestructure.persistence.PetType
 import org.springframework.samples.petclinic.owner.PetType;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository class for <code>PetType</code> domain objects.
@@ -37,5 +38,7 @@ public interface PetTypeRepository extends JpaRepository<PetTypeEntity, Integer>
 	 */
 	@Query("SELECT ptype FROM PetType ptype ORDER BY ptype.name")
 	List<PetTypeEntity> findPetTypes();
+
+	Optional<PetTypeEntity> findPetTypeByName(String name);
 
 }

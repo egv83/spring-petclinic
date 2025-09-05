@@ -14,7 +14,8 @@ public class PetXOwnerStrategy implements BuscarPetStrategy{
 
 		List<Pet> mascota = owner.getPets().stream()
 			.filter(
-				pet -> pet.getOwner().getFirtsName().equalsIgnoreCase(nombreOwner)
+				pet -> pet.getOwner().getFirtsName().equalsIgnoreCase(nombreOwner) ||
+							pet.getOwner().getLastName().equalsIgnoreCase(nombreOwner)
 			)
 			.collect(Collectors.toUnmodifiableList());
 		return mascota;
